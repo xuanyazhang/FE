@@ -73,7 +73,9 @@ SUMMARY.md示例:
 
  ![文档目录](../images/summary.png)
 
-**编写完SUMMARY.md后再次执行gitbook init命令，gitbook会根据目录内容自动创建文件夹和文件**
+> 注意：编写完SUMMARY.md后再次执行gitbook init命令，gitbook会根据目录内容自动创建文件夹和文件
+
+> introduction菜单项指向README，默认无法替换和删除
 
 * 本地预览
 
@@ -83,7 +85,7 @@ $ gitbook serve
 ```
 然后浏览器打开 [http://localhost:4000](http://localhost:4000) 就能预览了，control + c 停止。
 
-输出静态网站(html)
+* 输出静态网站(html)
 
 ```
 $ gitbook build
@@ -91,8 +93,28 @@ $ gitbook build
 ```
 gitbook serve和gitbook build 命令都会在书籍目录生成 _book，前者能实时预览
 
+输出静态网站就可部署到web服务器上，或者通过在阿里云或者腾讯云购买域名，网页服务挂载在GitHub Page上供互联网用户访问
+
 ### 3. book.json详解
 
 ### 4. GitBook与GitHub建立关联(integration)
 
-[GitBook官网：https://www.gitBook.com/](https://www.gitBook.com/)
+1）进入GitBook官网注册，登录  [GitBook官网：https://www.gitbook.com/](https://www.gitbook.com/)
+
+2）使用默认账户，或者创建新的ORGANIZATIONS，如图所示
+
+![账户或组织](../images/setting.png)
+
+3）选中账户或者组织，按照向导创建space(免费用户可创建两个space,但只有一个是public的)，如图所示
+
+![space空间](../images/space.png)
+
+4) 创建完space后, 点击红框部分菜单，选择integrations，进行GitBook与其他工具的关联
+
+![关联](../images/integration.png)
+
+5）选择GitHub按照向导，完成即可实现GitHub和GitBook的关联，本人选择在GitHub编写，GitBook实时更新
+
+![GitHub关联](../images/step.png)
+
+6) 完成绑定后，用户本地编写md文件，然后通过Git上传到GitHub上，GitBook就会自动更新
