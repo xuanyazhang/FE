@@ -1,8 +1,29 @@
 {
-    "title" : "公共服务组文档库",
+    "title" : "前端学习",
+    "links" : { "sidebar" : { "首页" : "http://zhangxy.github.io" } },
     "theme-default": {
         "showLevel": true
     },
-    "plugins": ["summary", "toggle-chapters", "theme-comscore"]
+    "plugins": ["github","theme-comscore","-search", "github-buttons"],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/xuanyazhang/FE"
+        },
+        "github-buttons": {
+        "buttons": [{
+            "user" : "xuanyazhang",
+            "repo" : "FE",
+            "type" : "star",
+            "size" : "small",
+            "count": true
+        }, {
+            "user" : "xuanyazhang",
+            "repo" : "FE",
+            "type" : "fork",
+            "size" : "small",
+            "count": true
+        }]
+    }
+    }
 }
 
