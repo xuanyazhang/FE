@@ -1,6 +1,6 @@
 # GitBook
 
-### 1. GitBook简介
+### 1. GitBook介绍
 
 首先要区分Git、Github和GitBook，三者之间是什么样的关系，GitBook使用Git和markdown来编排书籍，GitBook和Github没有直接的关系，不过用户可以手动添加GitBook和Github的关联(inteGration)，通过修改Github上的markdown文件，实现GitBook实时更新
 
@@ -96,6 +96,52 @@ gitbook serve和gitbook build 命令都会在书籍目录生成 _book，前者�
 输出静态网站就可部署到web服务器上，或者通过在阿里云或者腾讯云购买域名，网页服务挂载在GitHub Page上供互联网用户访问
 
 ### 3. book.json详解
+使用GitBook就不得不提到book.json配置文件，book.json实现了用户的个性化配置。
+
+[GitBook插件网站: https://plugins.gitbook.com/plugin/](https://plugins.gitbook.com/plugin/)
+
+```
+{
+  "title": "书籍标题",//标题
+  "description": "书籍描述",//文档描述
+  "language": "zh",//选择编辑的语言环境
+  "plugins": [ //引入需要的插件，前面有-号的为uninstall相应的插件
+    "disqus",
+    "github",
+    "editlink",
+    "theme-comscore",
+    "-search", 
+    "github-buttons"
+    "links"
+  ],
+  "styles": {
+    "website": "styles/*.css" //引入css文件进行css样式的修改
+  },
+  "pluginsConfig": {
+  	//插件的相关配置，和plugin里对应，详情可见每个插件的使用说明
+    "links": {
+        "gitbook": false,
+        "sharing": {
+            "google": false,
+            "facebook": false,
+            "twitter": false,
+            "all": false
+        }
+    },//默认的一些分享的展示与隐藏，true为展示，false为隐藏
+    "disqus": {
+      "shortName": "disqus注册的id"//生成评论的插件
+    },
+    "github": {
+      "url": "对应的github项目地址(可通过github查看复制地址过来)"
+    },
+    "editlink": {
+      "base": "github文档所在地址",
+      "label": "编辑本页面"//内容顶部显示 编辑本页 链接。
+    }
+  }
+}
+
+```
 
 ### 4. GitBook与GitHub建立关联(integration)
 

@@ -4,26 +4,39 @@
     "theme-default": {
         "showLevel": true
     },
-    "plugins": ["github","theme-comscore","-search", "github-buttons"],
+    "plugins": ["github","theme-comscore","-search", "github-buttons", "links", "edit-link"],
     "pluginsConfig": {
         "github": {
             "url": "https://github.com/xuanyazhang/FE"
         },
+        "links": {
+            "gitbook": false,
+            "sharing": {
+                "google": true,
+                "facebook": true,
+                "twitter": false,
+                "all": false
+            }
+        },
         "github-buttons": {
-        "buttons": [{
-            "user" : "xuanyazhang",
-            "repo" : "FE",
-            "type" : "star",
-            "size" : "small",
-            "count": true
-        }, {
-            "user" : "xuanyazhang",
-            "repo" : "FE",
-            "type" : "fork",
-            "size" : "small",
-            "count": true
-        }]
-    }
+            "buttons": [{
+                "user" : "xuanyazhang",
+                "repo" : "FE",
+                "type" : "star",
+                "size" : "small",
+                "count": true
+            }, {
+                "user" : "xuanyazhang",
+                "repo" : "FE",
+                "type" : "fork",
+                "size" : "small",
+                "count": true
+            }]
+        },
+        "edit-link": {
+            "base": "https://github.com/xuanyazhang/FE/blob/master/",
+            "label": "Edit This Page"
+        }
     }
 }
 
