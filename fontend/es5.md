@@ -39,10 +39,15 @@
    异步编程共有以下方法
 
    * 回调函数
+
    * 事件监听
+
    * 观察者
+
    * Promise
+
    * Generator
+   
    * async/await
   
    **传统解决方案**
