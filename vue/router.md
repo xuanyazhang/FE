@@ -2,7 +2,7 @@
 
 ### 使用指南
 
-   1）Vue要全局引用VueRouter插件
+   1）Vue要全局引用VueRouter插件, VueRouter本身就是一个对象，需要通过new实例化
    
    2）实例中要同时挂载 new VueRouter({})实例
 
@@ -31,8 +31,60 @@
 
    4）router-view 是 routes中定义的path对应的component的代词，实际渲染中会被component组件的渲染视图替换掉
 
-   5) router-link 最后会被渲染为```<a>```标签中 存在与模版组件中， **切记router-link和router-view没有直接关系，router-view是组件的具体渲染结果，router-link只是组件中定义的链接元素**
+   5）router-link 最后会被渲染为```<a>```标签中 存在与模版组件中， **切记router-link和router-view没有直接关系，router-view是组件的具体渲染结果，router-link只是组件中定义的链接元素**
 
+   6）vue-router单页应用路径之间的切换，实际就是组件的切换
+
+### Hash模式和Histroy模式
+
+    vue-router在实现单页面前端路由时，提供两种方式：Hash模式和History模式，根据mode参数来决定采用那种模式，默认是hash
+
+   **Hash模式**
+
+    hash(#)是URL的锚点，代表网页中的一个位置，单单改变#后的部分，浏览器只会滚动到相应位置，不会重新加载网页。每一次改变#后的部分，都会在浏览器的访问历史中增加一个记录，使用”后退”按钮，就可以回到上一个位置
+
+    hash模式通过锚点的改变，根据不同的值，渲染制定位置的数据，hash模式的原理就是window监听hash值的改变，触发onhashchange事件
+
+    ```
+    // vue-router源码
+
+    window.addEventListener(supportsPushState ? 'popstate' : 'hashchange', () => {
+      const current = this.current
+      if (!ensureSlash()) {
+        return
+      }
+      this.transitionTo(getHash(), route => {
+        if (supportsScroll) {
+          handleScroll(this.router, route, current, true)
+        }
+        if (!supportsPushState) {
+          replaceHash(route.fullPath)
+        }
+      })
+    })
+
+    ```
+
+   **History模式**
+   
+   原有的window.history对象，可以通过back(),forward(),go()方法来完成用户历史记录中的跳转，HTML5 history对象增加了pushState和replaceState方法，他们分别可以添加和修改历史记录条目。这些方法通常与window.
+   
+   每当处于激活状态的历史记录条目发生变化时,popstate事件就会在对应window对象上触发. popstate事件只会在浏览器某些行为下触发, 比如点击后退、前进按钮(或者在JavaScript中调用history.back()、history.forward()、history.go()方法).
+
+   本地webpack 用webpack-dev-server调试时需要增加historyApiFallback选项，上传服务器时需要apache配置，否则不会识别 http:// ***/index 这种链接
+
+   ```
+   devServer: {
+        contentBase: '../dist',
+        hot: true,
+        port: 3000,
+        open: "Google Chrome",
+        historyApiFallback:{
+            index:'/index.html'//index.html为当前目录创建的template.html
+        }
+    },
+
+   ```
 ### 常用知识
 
    1）动态路由匹配和编程式导航
