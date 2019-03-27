@@ -1,2 +1,2 @@
-# 服务端webpack
+# 服务端webpack配置
 
