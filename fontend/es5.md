@@ -38,23 +38,88 @@
 
    异步编程共有以下方法
 
-   * 回调函数
+   * 回调函数(callback)
 
    * 事件监听
+    
+    .eventName(function(){})
 
    * 观察者
 
    * Promise
 
-   * Generator
-   
+   Promise是一个容器也是一个对象，通过new Promise((resolve, reject) => {}) 进行示例化，接收的函数只接受resolve和reject两个参数，其中函数内一般是异步操作，resolve()托管成功数据，reject托管失败数据
+
+   ```
+   function reqGet (url) {
+     return new Promise((resolve, reject) => {
+        stream.fetch({
+        method: 'GET',
+        url: url,
+        type: 'json'
+        }, (res) => {
+        if (res.ok) {
+            resolve(res.data)
+        } else {
+            reject(res.statusText)
+        }
+        })
+     })
+   }
+
+   ```
+
    * async/await
+   
+   1) async 函数返回一个 Promise 对象，可以使用 then 方法添加回调函数，async内部没有await时，默认返回值会托管在resolve和reject中
+
+   ```
+    async function imAsync(num) {
+        if (num > 0) {
+            return num // 这里相当于resolve(num)
+        } else {
+            throw num // 这里相当于reject(num)
+        }
+    }
+
+    imAsync(1).then(function (v) {
+        console.log(v); // 1
+    });
+
+    // 注意这里是catch
+    imAsync(0).catch(function (v) {
+        console.log(v); // 0
+    })
+
+   ```
+   
+   2) 当函数执行的时候，一旦遇到 await await会暂停当前async函数的执行，等待后面的Promise的计算结果返回以后再继续执行当前的async函数。
+
+   ```
+   (async function() {
+    console.log(1)
+
+    await new Promise((resolve, reject) => {
+        setTimeout(function(){
+        console.log(2)
+        resolve()
+        },1000)
+    })
+
+    console.log(3)
+   })()
+
+    console.log(4)
+
+    输出: 1,4,2,3
+
+   ```
   
    **传统解决方案**
 
    回调函数和事件
 
-   **Promise、Generator和async...await方案**
+   **Promise和async...await方案**
 
    Promise是一个容器，里面保存着某个未来才会结束的事件的结果，从语法上说，Promise是一个对象，从它可以获取异步操作的消息
 
